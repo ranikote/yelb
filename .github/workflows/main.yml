@@ -15,13 +15,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # - name: Build yelb-ui Docker image
-      #   run: |
-      #     docker build -t yelb-ui:latest ./yelb-ui
+      - name: Build yelb-ui Docker image
+        run: |
+          docker build -t yelb-ui:latest ./yelb-ui
           
       - name: Build yelb-db Docker image
         run: |
           docker build -t yelb-db:latest ./yelb-db
+          
+      - name: List Docker images
+        run: |
+           docker images
 
 
 
