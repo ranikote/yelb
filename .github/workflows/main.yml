@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: Runner1
+    runs-on: tag1
 
     steps:
       - name: Checkout repository
