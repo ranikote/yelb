@@ -18,6 +18,3 @@ jobs:
         run: |
           docker build -t yelb-ui:latest ./yelb-ui
 
-      # - name: Build yelb-db image
-      #   run: |
-      #     docker build -t yelb-db:latest ./yelb-db
