@@ -42,10 +42,10 @@ jobs:
       # - name: Scan yelb-db for vulnerabilities with Docker Scout
       #   run: docker scout cves yelb-db:latest
         
-      - name: Lint yelb-ui Dockerfile
+      - name: Lint yelb-db Dockerfile
         run: hadolint ./yelb-ui/Dockerfile
 
-      - name: Lint yelb-db Dockerfile
+      - name: Lint yelb-ui Dockerfile
         run: hadolint ./yelb-db/Dockerfile
 
         
