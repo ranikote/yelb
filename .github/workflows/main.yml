@@ -11,9 +11,8 @@ jobs:
   build:
     runs-on: tag1
     steps:
-      - name: 🔍 Confirm file exists
-        run: |
-                  ls -l docker-compose.yml
+      - name: 🔍 Show full file structure
+        run: ls -R
 
    
 
