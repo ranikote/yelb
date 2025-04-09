@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  yelb-ui:
+    build:
+      context: ./yelb-ui
+    ports:
+      - "8085:80"
+    depends_on:
+      - yelb-appserver
+
+  yelb-appserver:
+    build:
+      context: ./yelb-appserver
+    depends_on:
+      - redis-server
+      - yelb-db
+    environment:
+      - YELB_DB_SERVER=yelb-db
+      - YELB_DB_NAME=yelb
+      - YELB_DB_USER=postgres
+      - YELB_DB_PASS=postgres
+      - REDIS_SERVER=redis-server
+
+  redis-server:
+    image: redis:4.0.2
+
+  yelb-db:
+    build:
+      context: ./yelb-db
