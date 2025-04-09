@@ -50,7 +50,7 @@ jobs:
       #   run: docker scout cves yelb-appserver:latest
 
       - name: Build and start services
-        run: docker compose up -d --build
+        run: docker-compose up -d --build
 
       - name: Check running containers
         run: docker ps -a
