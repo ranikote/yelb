@@ -48,6 +48,12 @@ jobs:
 
       # - name: Scan yelb-db for vulnerabilities with Docker Scout
       #   run: docker scout cves yelb-appserver:latest
+
+      - name: Build and start services
+        run: docker compose up -d --build
+
+      - name: Check running containers
+        run: docker ps -a
         
       - name: Lint yelb-db Dockerfile
         run: hadolint ./yelb-ui/Dockerfile
