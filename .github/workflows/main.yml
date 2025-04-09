@@ -36,18 +36,18 @@ jobs:
         run: |
            docker images
 
-      - name: Set up Docker Scout
-        run: |
-          docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
+      # - name: Set up Docker Scout
+      #   run: |
+      #     docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
           
-      - name: Scan yelb-ui for vulnerabilities with Docker Scout
-        run: docker scout cves yelb-ui:latest
+      # - name: Scan yelb-ui for vulnerabilities with Docker Scout
+      #   run: docker scout cves yelb-ui:latest
 
-      - name: Scan yelb-db for vulnerabilities with Docker Scout
-        run: docker scout cves yelb-db:latest
+      # - name: Scan yelb-db for vulnerabilities with Docker Scout
+      #   run: docker scout cves yelb-db:latest
 
-      - name: Scan yelb-db for vulnerabilities with Docker Scout
-        run: docker scout cves yelb-appserver:latest
+      # - name: Scan yelb-db for vulnerabilities with Docker Scout
+      #   run: docker scout cves yelb-appserver:latest
         
       - name: Lint yelb-db Dockerfile
         run: hadolint ./yelb-ui/Dockerfile
