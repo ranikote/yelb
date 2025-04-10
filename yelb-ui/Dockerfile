@@ -57,3 +57,5 @@ COPY --from=ui-builder /clarity-seed/dev/dist /clarity-seed/dev/dist
 
 CMD ["./startup.sh"]
 
+
+
