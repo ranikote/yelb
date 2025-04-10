@@ -57,9 +57,9 @@ jobs:
 
        - name: 📦 Push Docker image to ECR
          run: |
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-ui:latest
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-db:latest
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-appserver:latest
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:latest
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:latest
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:latest
           
        - name: List Docker images
          run: |
