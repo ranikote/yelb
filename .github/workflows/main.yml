@@ -75,13 +75,12 @@ jobs:
 
       # - name: Check running containers
       #   run: docker ps -a
-      - name: Lint yelb-db Dockerfile
-        # run: hadolint ./yelb-ui/Dockerfile
-        run: cat yelb-ui/test.txt
+      
+      
   
       - name: Lint yelb-db Dockerfile
-        # run: hadolint ./yelb-ui/Dockerfile
-        run: echo "Hello World"
+        run: hadolint ./yelb-ui/Dockerfile
+       
 
       - name: Lint yelb-ui Dockerfile
         run: hadolint ./yelb-db/Dockerfile
