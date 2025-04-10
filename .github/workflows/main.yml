@@ -51,9 +51,10 @@ jobs:
           
        - name: 🏷️ Tag Docker image
          run: |
-          docker tag  yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-ui:latest
-          docker tag  yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-db:latest
-          docker tag  yelb-appserver 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-appserver:latest
+          docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+          docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+          docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+
 
        - name: 📦 Push Docker image to ECR
          run: |
