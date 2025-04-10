@@ -13,85 +13,85 @@ jobs:
     steps:
     #Dockerhub credentials#
     
-       - name: Log in to Docker Hub
-         uses: docker/login-action@v3
-         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+       # - name: Log in to Docker Hub
+       #   uses: docker/login-action@v3
+       #   with:
+       #    username: ${{ secrets.DOCKER_USERNAME }}
+       #    password: ${{ secrets.DOCKER_PASSWORD }}
 
-       - name: Configure AWS credentials
-         uses: aws-actions/configure-aws-credentials@v2
-         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+       # - name: Configure AWS credentials
+       #   uses: aws-actions/configure-aws-credentials@v2
+       #   with:
+       #    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+       #    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+       #    aws-region: us-east-1
 
-       - name: Login to Amazon ECR
-         run: |
-          aws ecr get-login-password --region us-east-1 | \
-          docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
+       # - name: Login to Amazon ECR
+       #   run: |
+       #    aws ecr get-login-password --region us-east-1 | \
+       #    docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
           
-       - name: Set up Docker Scout
-         run: |
-            docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
+       # - name: Set up Docker Scout
+       #   run: |
+       #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       #Build Docker images#
           
-       - name: Build yelb-ui Docker image
-         run: |
-          docker build -t yelb-ui:latest ./yelb-ui
-          docker build -t yelb-db:latest ./yelb-db
-          docker build -t yelb-appserver:latest ./yelb-appserver
+       # - name: Build yelb-ui Docker image
+       #   run: |
+       #    docker build -t yelb-ui:latest ./yelb-ui
+       #    docker build -t yelb-db:latest ./yelb-db
+       #    docker build -t yelb-appserver:latest ./yelb-appserver
           
-       - name: Tag Docker image
-         run: |
-          docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-          docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-          docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+       # - name: Tag Docker image
+       #   run: |
+       #    docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
 
-       - name: Push Docker image to ECR
-         run: |
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+       # - name: Push Docker image to ECR
+       #   run: |
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
           
-       - name: List Docker images
-         run: |
-            docker images
-    #Scan Docker images using Docker scout#
+    #    - name: List Docker images
+    #      run: |
+    #         docker images
+    # #Scan Docker images using Docker scout#
           
-       - name: Scan yelb-ui for vulnerabilities with Docker Scout
-         run: |
-            docker scout cves yelb-ui:latest
-            docker scout cves yelb-db:latest
-            docker scout cves yelb-appserver:latest
+    #    - name: Scan yelb-ui for vulnerabilities with Docker Scout
+    #      run: |
+    #         docker scout cves yelb-ui:latest
+    #         docker scout cves yelb-db:latest
+    #         docker scout cves yelb-appserver:latest
 
-      # #Scan Docker images using hadolint#
-      #  - name: Scan docker images for Docker hadolint
-      #    run:  |
-      #       hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-ui/Dockerfile
-      #       hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-db/Dockerfile
-      #       hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
+      #Scan Docker images using hadolint#
+       - name: Scan docker images for Docker hadolint
+         run:  |
+            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-ui/Dockerfile
+            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-db/Dockerfile
+            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
 
 
-        #Build the applictaion using docker-compose#
-       - name: Run docker-compose up
-         run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
+       #  #Build the applictaion using docker-compose#
+       # - name: Run docker-compose up
+       #   run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
 
         #Slack Integration#
 
-       - name: Notify Slack on success
-         if: success()
-         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+       # - name: Notify Slack on success
+       #   if: success()
+       #   run: |
+       #    curl -X POST -H 'Content-type: application/json' \
+       #    --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
+       #    ${{ secrets.SLACK_WEBHOOK_URL }}
 
-       - name: Notify Slack on failure
-         if: failure()
-         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"❌ Build failed on GitHub Actions."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+       # - name: Notify Slack on failure
+       #   if: failure()
+       #   run: |
+       #    curl -X POST -H 'Content-type: application/json' \
+       #    --data '{"text":"❌ Build failed on GitHub Actions."}' \
+       #    ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
         
