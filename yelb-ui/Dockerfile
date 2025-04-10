@@ -1,5 +1,6 @@
 FROM node:12.22
-MAINTAINER massimo@it20.info
+# MAINTAINER massimo@it20.info
+LABEL maintainer massimo@it20.info
 
 WORKDIR /
 
@@ -7,7 +8,7 @@ RUN npm install -g @angular/cli@6.0.0
 
 RUN npm install node-sass@4.13.1
 
-ADD clarity-seed-newfiles clarity-seed-newfiles 
+COPY clarity-seed-newfiles clarity-seed-newfiles 
 
 RUN git clone https://github.com/vmware/clarity-seed.git
 WORKDIR /clarity-seed
@@ -37,7 +38,7 @@ FROM nginx:1.17.10
 MAINTAINER massimo@it20.info
 
 WORKDIR /
-ADD startup.sh startup.sh
+COPY startup.sh startup.sh
 
 ENV UI_ENV=prod 
 
