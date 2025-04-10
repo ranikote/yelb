@@ -18,6 +18,11 @@ jobs:
          with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+       - name: 🔑 Login to Amazon ECR
+         run: |
+          aws ecr get-login-password --region us-east-1 | \
+          docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
           
       
 
@@ -25,7 +30,10 @@ jobs:
        #   run: |
        #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
             
-     #Build Docker images#
+     
+
+      
+      #Build Docker images#
           
       
        # - name: Build yelb-ui Docker image
@@ -33,7 +41,18 @@ jobs:
        #    docker build -t yelb-ui:latest ./yelb-ui
        #    docker build -t yelb-db:latest ./yelb-db
        #    docker build -t yelb-appserver:latest ./yelb-appserver
-           
+          
+       - name: 🏷️ Tag Docker image
+         run: |
+          docker tag  yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-ui:latest
+          docker tag  yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-db:latest
+          docker tag  yelb-appserver 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-appserver:latest
+
+       - name: 📦 Push Docker image to ECR
+         run: |
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-ui:latest
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-db:latest
+          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/yelb-appserver:latest
           
        - name: List Docker images
          run: |
