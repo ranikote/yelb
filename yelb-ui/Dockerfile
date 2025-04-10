@@ -1,4 +1,4 @@
-FROM node:12.22
+FROM node:12.22 AS builder
 # MAINTAINER massimo@it20.info
 LABEL maintainer massimo@it20.info
 
@@ -34,7 +34,7 @@ RUN ng build --environment=test --output-path=./test/dist/
 RUN ng build --environment=dev --output-path=./dev/dist/
 
 
-FROM nginx:1.17.10
+FROM nginx:1.17.10 AS builder
 MAINTAINER massimo@it20.info
 
 WORKDIR /
