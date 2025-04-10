@@ -1,4 +1,4 @@
-FROM postgres:10.21 AS builder
+FROM postgres:10.21
 
 LABEL org.opencontainers.image.authors="massimo@it20.info"
 
