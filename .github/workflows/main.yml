@@ -19,44 +19,36 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-       - name: 🔐 Configure AWS credentials
+       - name: Configure AWS credentials
          uses: aws-actions/configure-aws-credentials@v2
          with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-       - name: 🔑 Login to Amazon ECR
+       - name: Login to Amazon ECR
          run: |
           aws ecr get-login-password --region us-east-1 | \
           docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
           
-      
-
-       # - name: Set up Docker Scout
-       #   run: |
-       #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
-            
-     
-
-      
+       - name: Set up Docker Scout
+         run: |
+            docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       #Build Docker images#
           
-      
        - name: Build yelb-ui Docker image
          run: |
           docker build -t yelb-ui:latest ./yelb-ui
           docker build -t yelb-db:latest ./yelb-db
           docker build -t yelb-appserver:latest ./yelb-appserver
           
-       - name: 🏷️ Tag Docker image
+       - name: Tag Docker image
          run: |
           docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
           docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
           docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
 
-
-       - name: 📦 Push Docker image to ECR
+       - name: Push Docker image to ECR
          run: |
           docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
           docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
@@ -67,11 +59,11 @@ jobs:
             docker images
     #Scan Docker images using Docker scout#
           
-       # - name: Scan yelb-ui for vulnerabilities with Docker Scout
-       #   run: |
-       #      docker scout cves yelb-ui:latest
-       #      docker scout cves yelb-db:latest
-       #      docker scout cves yelb-appserver:latest
+       - name: Scan yelb-ui for vulnerabilities with Docker Scout
+         run: |
+            docker scout cves yelb-ui:latest
+            docker scout cves yelb-db:latest
+            docker scout cves yelb-appserver:latest
 
       # #Scan Docker images using hadolint#
       #  - name: Scan docker images for Docker hadolint
