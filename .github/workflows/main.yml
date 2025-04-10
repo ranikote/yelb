@@ -47,8 +47,8 @@ jobs:
       #Scan Docker images using hadolint#
        - name: Scan docker images for Docker hadolint
          run:  |
-            hadolint ./yelb-db/Dockerfile --ignore DL4000
             hadolint ./yelb-ui/Dockerfile --ignore DL4000
+            hadolint ./yelb-db/Dockerfile --ignore DL4000
             hadolint ./yelb-app-server/Dockerfile --ignore DL4000
 
         #Build the applictaion using docker-compose#
