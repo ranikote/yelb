@@ -1,5 +1,6 @@
-FROM bitnami/ruby:2.7.4
-MAINTAINER massimo@it20.info
+FROM bitnami/ruby:2.7.4 AS builder
+# MAINTAINER massimo@it20.info
+LABEL maintainer massimo@it20.info
 
 ################## BEGIN INSTALLATION ######################
 
