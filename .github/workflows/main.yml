@@ -53,9 +53,9 @@ jobs:
       #   run: |
       #     docker build -t yelb-db:latest ./yelb-appserver
           
-      - name: List Docker images
-        run: |
-           docker images
+      # - name: List Docker images
+      #   run: |
+      #      docker images
 
       # - name: Set up Docker Scout
       #   run: |
@@ -79,7 +79,7 @@ jobs:
       
   
       - name: Lint yelb-db Dockerfile
-        run: hadolint ./yelb-ui/Dockerfile
+        run: hadolint ./yelb-db/Dockerfile
        
 
       - name: Lint yelb-ui Dockerfile
