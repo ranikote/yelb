@@ -1,6 +1,6 @@
 FROM postgres:10.21 AS builder
 
-LABEL maintainer="massimo@it20.info"
+LABEL org.opencontainers.image.authors="massimo@it20.info"
 
 WORKDIR /
 
