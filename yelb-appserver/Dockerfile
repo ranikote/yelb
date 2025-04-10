@@ -40,4 +40,3 @@ RUN gem install aws_lambda_ric
 
 CMD ["./startup.sh"]
 
-
