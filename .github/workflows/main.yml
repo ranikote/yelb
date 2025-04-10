@@ -80,8 +80,10 @@ jobs:
   
       # - name: Run Hadolint
       #   run: hadolint ./yelb-db/Dockerfile --ignore DL4000
+      # - name: Lint yelb-ui Dockerfile
+      #   run: hadolint ./yelb-db/Dockerfile --ignore DL4000
       - name: Lint yelb-ui Dockerfile
-        run: hadolint ./yelb-db/Dockerfile --ignore DL4000
+        run: hadolint ./yelb-app-server/Dockerfile --ignore DL4000
 
 
         
