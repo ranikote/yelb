@@ -11,32 +11,17 @@ jobs:
   build:
     runs-on: tag1
     steps:
-      - name: Notify Slack on success
-        if: success()
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Notify Slack on failure
-        if: failure()
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"❌ Build failed on GitHub Actions."}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
-      # - name: Run docker-compose up
-      #   run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
-
-
-
-   
-
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
+    #Dockerhub credentials#
+       - name: Log in to Docker Hub
+         uses: docker/login-action@v3
+         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+       - name: Set up Docker Scout
+          run: |
+            docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
+
           
       # - name: Checkout repository
       #   uses: actions/checkout@v3
@@ -57,9 +42,7 @@ jobs:
       #   run: |
       #      docker images
 
-      # - name: Set up Docker Scout
-      #   run: |
-      #     docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
+     
           
       # - name: Scan yelb-ui for vulnerabilities with Docker Scout
       #   run: docker scout cves yelb-ui:latest
@@ -82,10 +65,25 @@ jobs:
       #   run: hadolint ./yelb-db/Dockerfile --ignore DL4000
       # - name: Lint yelb-ui Dockerfile
       #   run: hadolint ./yelb-db/Dockerfile --ignore DL4000
-      - name: Lint yelb-ui Dockerfile
-        run: hadolint ./yelb-app-server/Dockerfile --ignore DL4000
+      # - name: Lint yelb-ui Dockerfile
+      #   run: hadolint ./yelb-app-server/Dockerfile --ignore DL4000
 
+        # - name: Run docker-compose up
+      #   run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
 
+  # - name: Notify Slack on success
+  #       if: success()
+  #       run: |
+  #         curl -X POST -H 'Content-type: application/json' \
+  #         --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
+  #         ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  #     - name: Notify Slack on failure
+  #       if: failure()
+  #       run: |
+  #         curl -X POST -H 'Content-type: application/json' \
+  #         --data '{"text":"❌ Build failed on GitHub Actions."}' \
+  #         ${{ secrets.SLACK_WEBHOOK_URL }}
         
 
 
