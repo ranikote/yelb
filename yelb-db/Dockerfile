@@ -1,4 +1,4 @@
-FROM postgres:10.21
+FROM postgres:10.21 AS builder
 # MAINTAINER massimo@it20.info
 LABEL maintainer massimo@it20.info
 
