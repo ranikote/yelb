@@ -5,8 +5,7 @@ LABEL maintainer="massimo@it20.info"
 
 WORKDIR /
 
-RUN npm install -g @angular/cli@6.0.0 && \
-    npm install node-sass@4.13.1
+RUN npm install -g @angular/cli@6.0.0 node-sass@4.13.1
 
 COPY clarity-seed-newfiles/ clarity-seed-newfiles/
 
@@ -44,6 +43,9 @@ ENV UI_ENV=prod
 COPY --from=ui-builder /clarity-seed/prod/dist /clarity-seed/prod/dist
 COPY --from=ui-builder /clarity-seed/test/dist /clarity-seed/test/dist
 COPY --from=ui-builder /clarity-seed/dev/dist /clarity-seed/dev/dist
+
+CMD ["./startup.sh"]
+
 
 CMD ["./startup.sh"]
 
