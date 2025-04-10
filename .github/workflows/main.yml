@@ -43,11 +43,11 @@ jobs:
       #Build Docker images#
           
       
-       # - name: Build yelb-ui Docker image
-       #   run: |
-       #    docker build -t yelb-ui:latest ./yelb-ui
-       #    docker build -t yelb-db:latest ./yelb-db
-       #    docker build -t yelb-appserver:latest ./yelb-appserver
+       - name: Build yelb-ui Docker image
+         run: |
+          docker build -t yelb-ui:latest ./yelb-ui
+          docker build -t yelb-db:latest ./yelb-db
+          docker build -t yelb-appserver:latest ./yelb-appserver
           
        - name: 🏷️ Tag Docker image
          run: |
