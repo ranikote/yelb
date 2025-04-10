@@ -30,7 +30,8 @@ jobs:
          run: |
           docker build -t yelb-ui:latest ./yelb-ui
           docker build -t yelb-db:latest ./yelb-db
-          docker build -t yelb-db:appserver ./yelb-appserver
+          docker build -t yelb-appserver:latest ./yelb-appserver
+           
           
        - name: List Docker images
          run: |
