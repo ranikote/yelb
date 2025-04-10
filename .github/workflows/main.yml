@@ -11,8 +11,8 @@ jobs:
   build:
     runs-on: tag1
     steps:
-      - name: 🔍 Show full file structure
-        run: ls -R
+      - name: Run docker-compose up
+        run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
 
 
 
