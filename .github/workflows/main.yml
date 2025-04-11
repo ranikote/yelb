@@ -65,33 +65,25 @@ on:
        #      docker scout cves yelb-db:latest > yelb-db-cves.txt
        #      docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 jobs:
-  jfrog-integration-check:
+  jfrog-upload:
     runs-on: ubuntu-latest
-    steps:
-     
-     - name: Checkout repo
-       uses: actions/checkout@v4
-     
-     - name: Setup JFrog CLI
-       uses: jfrog/setup-jfrog-cli@v3
-     
-     - name: Debug - check jf CLI
-       run: jf --version
 
-     - name: Authenticate and check JFrog SaaS connection
-       env:
-         ARTIFACTORY_URL: ${{ secrets.JF_URL }}
-         ARTIFACTORY_USER: ${{ secrets.JFROG_USERNAME }}
-         ARTIFACTORY_API_KEY: ${{ secrets.JFROG_API_KEY }}
-       run: |
-         echo "🔐 Checking JFrog SaaS authentication..."
-         export JFROG_CLI_AVOID_NEW_VERSION_WARNING=true
-         jf config add my-server \
-           --url=$ARTIFACTORY_URL \
-           --user=$ARTIFACTORY_USER \
-           --apikey=$ARTIFACTORY_API_KEY \
-           --interactive=false
-         jf rt ping
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v3
+        with:
+          jfrog-version: latest
+
+      - name: Configure JFrog CLI
+        run: |
+          jf config add my-server \
+            --url=${{ secrets.JF_URL }} \
+            --user=${{ secrets.JF_USER }} \
+            --password=${{ secrets.JF_PASSWORD }} \
+            --interactive=false
 
             
 
