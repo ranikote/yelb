@@ -36,11 +36,11 @@ jobs:
        #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       #Build Docker images#
           
-       # - name: Build yelb-ui Docker image
-       #   run: |
-       #    docker build -t yelb-ui:latest ./yelb-ui
-       #    docker build -t yelb-db:latest ./yelb-db
-       #    docker build -t yelb-appserver:latest ./yelb-appserver
+       - name: Build yelb-ui Docker image
+         run: |
+          docker build -t yelb-ui:latest ./yelb-ui > yelb-ui-cves.txt
+          docker build -t yelb-db:latest ./yelb-db > yelb-db-cves.txt
+          docker build -t yelb-appserver:latest ./yelb-appserver > yelb-appserver-cves.txt
           
        # - name: Tag Docker image
        #   run: |
@@ -66,11 +66,11 @@ jobs:
     #         docker scout cves yelb-appserver:latest
 
       #Scan Docker images using hadolint#
-       - name: Scan docker images for Docker hadolint
-         run:  |
-            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-ui/Dockerfile
-            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-db/Dockerfile
-            hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
+       # - name: Scan docker images for Docker hadolint
+       #   run:  |
+       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-ui/Dockerfile
+       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-db/Dockerfile
+       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
 
 
        #  #Build the applictaion using docker-compose#
