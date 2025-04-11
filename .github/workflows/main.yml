@@ -69,6 +69,8 @@ jobs:
 
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
+      - name: Debug - check jf CLI
+        run: jf --version
 
       - name: Configure CLI
         env:
