@@ -67,35 +67,32 @@ on:
 jobs:
   jfrog-integration:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v3
-        with:
-          version: latest
-          jfrog-url: ${{ secrets.JF_URL }}
-          jfrog-access-token: ${{ secrets.JFROG_API_KEY }}
-
-      - name: Ping JFrog Artifactory
-        run: jf ping
-
-         
-
-
-
-       # - name: Upload artifact
-       #   run: |
-       #    jfrog rt u "build/*.zip" "generic-local/my-app/${{ github.run_number }}/"
-
-       # - name: Publish build info
-       #   run: |
-       #    jfrog rt bp my-app ${{ github.run_number }}
-
-       # - name: Clean up
-       #   run: jfrog config remove artifactory-saas
+       - name: Checkout repo
+         uses: actions/checkout@v4
+ 
+       - name: Setup JFrog CLI
+         uses: jfrog/setup-jfrog-cli@v3
+ 
+       - name: Debug - check jf CLI
+         run: jf --version
+ 
+       - name: Authenticate and check JFrog SaaS connection
+         env:
+           ARTIFACTORY_URL: ${{ secrets.JF_URL }}          # e.g. https://mycompany.jfrog.io/artifactory
+           ARTIFACTORY_USER: ${{ secrets.JFROG_USERNAME }}
+           ARTIFACTORY_API_KEY: ${{ secrets.JFROG_API_KEY }}
+         run: |
+           echo "🔐 Checking JFrog SaaS authentication..."
+ 
+           response=$(curl -su $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY "$ARTIFACTORY_URL/api/system/ping")
+ 
+           if [[ "$response" == "OK" ]]; then
+             echo "✅ Successfully connected to JFrog SaaS!"
+           else
+             echo "❌ Failed to connect. Got response: $response"
+             exit 1
+           fi
             
 
       #Scan Docker images using hadolint#
