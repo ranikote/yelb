@@ -71,6 +71,9 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v3
 
       - name: Configure CLI
+        env:
+          JFROG_CLI_OFFER_CONFIG: false
+          JFROG_CLI_AVOID_NEW_VERSION_WARNING: true
         # run: |
           # jf config add artifactory-server \
           #   --url ${{ secrets.JF_URL }} \
