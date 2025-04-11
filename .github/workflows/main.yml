@@ -67,10 +67,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v3
-      - name: Debug - check jf CLI
-        run: jf --version
+      
+      - name: Manually install JFrog CLI (self-hosted fix)
+        run: |
+          curl -fL https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.74.1/jfrog-cli-linux-amd64/jf -o jf
+          chmod +x jf
+          sudo mv jf /usr/local/bin/jf
+
+      # - name: Debug - check jf CLI
+      #   run: jf --version
 
       - name: Configure CLI
         env:
