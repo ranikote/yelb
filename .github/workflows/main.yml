@@ -77,10 +77,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v3
-        with:
-          jfrog-version: latest
+      # - name: Set up JFrog CLI
+      #   uses: jfrog/setup-jfrog-cli@v3
+      #   with:
+      #     jfrog-version: latest
 
       - name: Configure JFrog CLI
         run: |
