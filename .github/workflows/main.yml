@@ -36,11 +36,11 @@ jobs:
        #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       #Build Docker images#
           
-       - name: Build yelb-ui Docker image
-         run: |
-          docker build -t yelb-ui:latest ./yelb-ui > yelb-ui-cves.txt
-          docker build -t yelb-db:latest ./yelb-db > yelb-db-cves.txt
-          docker build -t yelb-appserver:latest ./yelb-appserver > yelb-appserver-cves.txt
+       # - name: Build yelb-ui Docker image
+       #   run: |
+       #    docker build -t yelb-ui:latest ./yelb-ui 
+       #    docker build -t yelb-db:latest ./yelb-db 
+       #    docker build -t yelb-appserver:latest ./yelb-appserver 
           
        # - name: Tag Docker image
        #   run: |
@@ -57,13 +57,13 @@ jobs:
     #    - name: List Docker images
     #      run: |
     #         docker images
-    # #Scan Docker images using Docker scout#
+    #Scan Docker images using Docker scout#
           
-    #    - name: Scan yelb-ui for vulnerabilities with Docker Scout
-    #      run: |
-    #         docker scout cves yelb-ui:latest
-    #         docker scout cves yelb-db:latest
-    #         docker scout cves yelb-appserver:latest
+       - name: Scan yelb-ui for vulnerabilities with Docker Scout
+         run: |
+            docker scout cves yelb-ui:latest > yelb-ui-cves.txt
+            docker scout cves yelb-db:latest > yelb-db-cves.txt
+            docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 
       #Scan Docker images using hadolint#
        # - name: Scan docker images for Docker hadolint
