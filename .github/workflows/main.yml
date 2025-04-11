@@ -64,6 +64,13 @@ jobs:
        #      docker scout cves yelb-ui:latest > yelb-ui-cves.txt
        #      docker scout cves yelb-db:latest > yelb-db-cves.txt
        #      docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
+       - name: Checkout source code
+         uses: actions/checkout@v3
+
+       - name: Set up JFrog CLI
+         uses: jfrog/setup-jfrog-cli@v3
+         with:
+          version: latest
 
        - name: Configure JFrog CLI for SaaS
          run: |
