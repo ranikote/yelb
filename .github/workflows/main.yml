@@ -81,8 +81,8 @@ jobs:
         run: |
           jf config add my-server \
             --url=${{ secrets.JF_URL }} \
-            --user=${{ secrets.JF_USER }} \
-            --password=${{ secrets.JF_PASSWORD }} \
+            --user=${{ secrets.JFROG_USERNAME }} \
+            --password=${{ secrets.JFROG_API_KEY }} \
             --interactive=false
 
             
