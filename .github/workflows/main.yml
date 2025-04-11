@@ -65,6 +65,26 @@ jobs:
             docker scout cves yelb-db:latest > yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 
+       - name: Configure JFrog CLI for SaaS
+         run: |
+          jfrog config add artifactory-saas \
+                --url https://trialkgkkwb.jfrog.io/artifactory \
+                --user ${{ secrets.JFROG_USERNAME }} \
+                --apikey ${{ secrets.JFROG_API_KEY }} \
+                --interactive=false
+
+       # - name: Upload artifact
+       #   run: |
+       #    jfrog rt u "build/*.zip" "generic-local/my-app/${{ github.run_number }}/"
+
+       # - name: Publish build info
+       #   run: |
+       #    jfrog rt bp my-app ${{ github.run_number }}
+
+       # - name: Clean up
+       #   run: jfrog config remove artifactory-saas
+            
+
       #Scan Docker images using hadolint#
        # - name: Scan docker images for Docker hadolint
        #   run:  |
