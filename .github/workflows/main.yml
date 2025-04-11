@@ -65,25 +65,26 @@ on:
        #      docker scout cves yelb-db:latest > yelb-db-cves.txt
        #      docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 jobs:
-  jfrog-upload:
+  upload-to-jfrog:
     runs-on: ubuntu-latest
+
+    env:
+      JF_URL: ${{ secrets.JF_URL }}
+      JF_USER: ${{ secrets.JF_USER }}
+      JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup JFrog CLI
+      - name: Set up JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         with:
           jfrog-version: latest
 
       - name: Configure JFrog CLI
         run: |
-          jf config add my-server \
-            --url=${{ secrets.JF_URL }} \
-            --user=${{ secrets.JFROG_USERNAME }} \
-            --password=${{ secrets.JFROG_API_KEY }} \
-            --interactive=false
+          jf c add my-server --url="$JF_URL" --user="$JF_USER" --password="$JF_PASSWORD" --interactive=false
 
             
 
