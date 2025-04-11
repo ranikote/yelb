@@ -74,12 +74,14 @@ jobs:
 
        - name: Configure JFrog CLI
          run: |
-            jfrog config add artifactory-saas \
-                --url=https://trialkgkkwb.jfrog.io/artifactory \
-                --user=${{ secrets.JFROG_USERNAME }} \
-                --apikey=${{ secrets.JFROG_API_KEY }} \
-                --interactive=false
-  
+            - name: Configure JFrog CLI
+       - name: Configure JFrog CLI
+         run: |
+              jfrog config add artifactory-saas \
+                 --url=https://trialkgkkwb.jfrog.io/artifactory \
+                 --user=${{ secrets.JFROG_USERNAME }} \
+                 --apikey=${{ secrets.JFROG_API_KEY }} \
+                 --interactive=false
 
 
        # - name: Upload artifact
