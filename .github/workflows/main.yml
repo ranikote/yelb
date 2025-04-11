@@ -64,12 +64,7 @@ on:
        #      docker scout cves yelb-ui:latest > yelb-ui-cves.txt
        #      docker scout cves yelb-db:latest > yelb-db-cves.txt
        #      docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
-name: JFrog CLI Integration
 
-on:
-  push:
-    branches:
-      - main
 
 jobs:
   upload-artifact:
