@@ -71,13 +71,14 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v3
 
       - name: Configure CLI
-        run: |
-          jf config add artifactory-server \
-            --url ${{ secrets.JF_URL }} \
-            --user ${{ secrets.JFROG_USERNAME }} \
-            --password ${{ secrets.JFROG_API_KEY }}
+        # run: |
+          # jf config add artifactory-server \
+          #   --url ${{ secrets.JF_URL }} \
+          #   --user ${{ secrets.JFROG_USERNAME }} \
+          #   --password ${{ secrets.JFROG_API_KEY }}
 
-       
+        run: jf config add artifactory-server --url ${{ secrets.JF_URL }} --user ${{ secrets.JF_USER }} --password ${{ secrets.JF_PASSWORD }} --interactive=false
+
 
 
        # - name: Upload artifact
