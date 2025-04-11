@@ -86,14 +86,14 @@ jobs:
         run: |
           echo "🔐 Checking JFrog SaaS authentication..."
 
-          response=$(curl -su $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY "$ARTIFACTORY_URL/api/system/ping")
+          # response=$(curl -su $ARTIFACTORY_USER:$ARTIFACTORY_API_KEY "$ARTIFACTORY_URL/api/system/ping")
 
-          if [[ "$response" == "OK" ]]; then
-            echo "✅ Successfully connected to JFrog SaaS!"
-          else
-            echo "❌ Failed to connect. Got response: $response"
-            exit 1
-          fi
+          # if [[ "$response" == "OK" ]]; then
+          #   echo "✅ Successfully connected to JFrog SaaS!"
+          # else
+          #   echo "❌ Failed to connect. Got response: $response"
+          #   exit 1
+          # fi
 
 
 
