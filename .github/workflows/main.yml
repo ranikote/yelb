@@ -13,11 +13,11 @@ jobs:
     steps:
     #Dockerhub credentials#
     
-       - name: Log in to Docker Hub
-         uses: docker/login-action@v3
-         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+       # - name: Log in to Docker Hub
+       #   uses: docker/login-action@v3
+       #   with:
+       #    username: ${{ secrets.DOCKER_USERNAME }}
+       #    password: ${{ secrets.DOCKER_PASSWORD }}
 
        # - name: Configure AWS credentials
        #   uses: aws-actions/configure-aws-credentials@v2
@@ -64,24 +64,25 @@ jobs:
        #      docker scout cves yelb-ui:latest > yelb-ui-cves.txt
        #      docker scout cves yelb-db:latest > yelb-db-cves.txt
        #      docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
-       - name: Checkout source code
-         uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-       - name: Set up JFrog CLI
-         uses: jfrog/setup-jfrog-cli@v3
-         with:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v3
+        with:
           version: latest
 
-       - name: Configure JFrog CLI
-         run: |
-            - name: Configure JFrog CLI
-       - name: Configure JFrog CLI
-         run: |
-              jfrog config add artifactory-saas \
-                 --url=https://trialkgkkwb.jfrog.io/artifactory \
-                 --user=${{ secrets.JFROG_USERNAME }} \
-                 --apikey=${{ secrets.JFROG_API_KEY }} \
-                 --interactive=false
+      - name: Configure JFrog CLI
+        run: |
+           jfrog config add artifactory-saas \
+            --url=https://trialkgkkwb.jfrog.io/artifactory \
+            --user=${{ secrets.JFROG_USERNAME }} \
+            --apikey=${{ secrets.JFROG_API_KEY }} \
+            --interactive=false
+       
 
 
        # - name: Upload artifact
