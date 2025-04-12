@@ -79,9 +79,9 @@ jobs:
         with:
           version: latest
         env:
-          JF_URL: ${{ secrets.JF_URL }}
-          JF_USER: ${{ secrets.JFROG_USERNAME }}
-          JF_PASSWORD: ${{ secrets.JFROG_API_KEY }}
+          JF_URL: https://trialkgkkwb.jfrog.io
+          JF_USER: shriiee.raj98@gmail.com
+          JF_PASSWORD: 46137cd0-b85b-4f26-9743-aacabad0a99ca0yssp9ou0bqc
 
             
 
