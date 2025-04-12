@@ -86,7 +86,7 @@ jobs:
       - name: Upload artifact
         run: |
    
-          jf rt u "yelb-ui-cves.txt" "maven/Maven1"
+          jf rt u "yelb-ui-cves.txt" "generic-local/foldera"
 
             
 
