@@ -67,7 +67,7 @@ on:
 
 
 jobs:
-  upload-artifact:
+  Jfrog-Integration-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -83,9 +83,10 @@ jobs:
            JF_URL: ${{ secrets.JF_URL }}
            JF_USER: ${{ secrets.JF_USER }}
            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-          # JF_URL: https://trialkgkkwb.jfrog.io
-          # JF_USER: shriiee.raj98@gmail.com
-          # JF_PASSWORD: cmVmdGtuOjAxOjE3NzU5NTk3NjA6RVpqbGJTM0ZpczNOajd0ZXVkTEVCTXNOVFJ3
+      - name: Upload artifact
+        run: |
+   
+          jf rt u "yelb-ui-cves.txt" "local/Maven"
 
             
 
