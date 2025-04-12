@@ -78,10 +78,14 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v3
         with:
           version: latest
+        
         env:
-          JF_URL: https://trialkgkkwb.jfrog.io
-          JF_USER: shriiee.raj98@gmail.com
-          JF_PASSWORD: cmVmdGtuOjAxOjE3NzU5NTk3NjA6RVpqbGJTM0ZpczNOajd0ZXVkTEVCTXNOVFJ3
+           JF_URL: ${{ secrets.JF_URL }}
+           JF_USER: ${{ secrets.JF_USER }}
+           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          # JF_URL: https://trialkgkkwb.jfrog.io
+          # JF_USER: shriiee.raj98@gmail.com
+          # JF_PASSWORD: cmVmdGtuOjAxOjE3NzU5NTk3NjA6RVpqbGJTM0ZpczNOajd0ZXVkTEVCTXNOVFJ3
 
             
 
