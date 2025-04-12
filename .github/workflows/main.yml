@@ -84,9 +84,7 @@ jobs:
            JF_USER: ${{ secrets.JF_USER }}
            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
       - name: Upload artifact
-        run: |
-   
-          run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+        run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
 
             
 
