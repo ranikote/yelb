@@ -48,6 +48,8 @@ jobs:
             docker scout cves yelb-db:latest > yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 
+       - name: List all files in current directory
+         run: find /home/fs-lp-27/actions-runner/_work/yelb/yelb -type f
        
 
 
