@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: tag1
+  # build:
+  #   runs-on: tag1
     # steps:
 #Dockerhub credentials#
     
