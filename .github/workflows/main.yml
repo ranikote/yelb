@@ -48,8 +48,7 @@ jobs:
             docker scout cves yelb-db:latest > yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
 
-       - name: List all files
-         run: echo "Full path to file:$(pwd)/yelb-ui-cves.txt"
+       
 
 
 
@@ -75,7 +74,8 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
       - name: Upload artifact to Artifactory
-        run: jf rt u "$(pwd)/yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+        run: jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+
 
 
 
