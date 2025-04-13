@@ -72,12 +72,11 @@ jobs:
           #   JF_USER: ${{ secrets.JF_USER }}
           #   JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         - name: Configure JFrog CLI with username, access token, and URL
-          run: |
-            jf config add my-server \
-               --url=https://trialkgkkwb.jfrog.io/artifactory \
-               --user=shriiee.raj98@gmail.com \
-               --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
-               --interactive=false
+             jf config add my-server \
+                --url=https://trialkgkkwb.jfrog.io/artifactory \
+                --user=shriiee.raj98@gmail.com \
+                --password=Karna@281993 \
+                --interactive=false
   
         - name: Upload artifact to Artifactory
           run: |
