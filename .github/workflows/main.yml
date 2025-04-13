@@ -76,7 +76,7 @@ jobs:
                    jf config add my-server \
                    --url=https://trialkgkkwb.jfrog.io/artifactory \
                    --user=shriiee.raj98@gmail.com \
-                   --password=Karna@281993 \
+                   --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
                    --interactive=false
   
         - name: Upload artifact to Artifactory
