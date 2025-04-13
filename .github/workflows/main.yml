@@ -41,32 +41,13 @@ jobs:
           docker build -t yelb-ui:latest ./yelb-ui 
           docker build -t yelb-db:latest ./yelb-db 
           docker build -t yelb-appserver:latest ./yelb-appserver 
-          
-       # - name: Tag Docker image
-       #   run: |
-       #    docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-       #    docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-       #    docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
 
-       # - name: Push Docker image to ECR
-       #   run: |
-       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
-          
-    #    - name: List Docker images
-    #      run: |
-    #         docker images
-    #Scan Docker images using Docker scout#
-          
        - name: Scan yelb-ui for vulnerabilities with Docker Scout
          run: |
             docker scout cves yelb-ui:latest > yelb-ui-cves.txt
             docker scout cves yelb-db:latest > yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
-
-
-jobs:
+            jobs:
   Jfrog-Integration-check:
     runs-on: ubuntu-latest
 
@@ -85,6 +66,36 @@ jobs:
            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
       - name: Upload artifact
         run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+
+
+
+
+
+
+
+
+            
+          
+       # - name: Tag Docker image
+       #   run: |
+       #    docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+
+       # - name: Push Docker image to ECR
+       #   run: |
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+          
+    #    - name: List Docker images
+    #      run: |
+    #         docker images
+    #Scan Docker images using Docker scout#
+          
+       
+            
+
 
             
 
