@@ -49,7 +49,7 @@ jobs:
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
             jobs:
   Jfrog-Integration-check:
-    runs-on: ubuntu-latest
+    runs-on: tag1
 
     steps:
       - name: Checkout code
