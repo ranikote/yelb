@@ -1,5 +1,6 @@
 # ---------- STAGE 1: Build Angular UI ----------
-FROM node:12.22 AS ui-builder
+# FROM node:12.22 AS ui-builder
+FROM node:16 AS ui-builder
 
 LABEL maintainer="massimo@it20.info"
 
