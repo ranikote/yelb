@@ -44,12 +44,11 @@ jobs:
 
        - name: Scan yelb-ui for vulnerabilities with Docker Scout
          run: |
-            docker scout cves yelb-ui:latest > yelb-ui-cves.txt
-            docker scout cves yelb-db:latest > yelb-db-cves.txt
-            docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
+            docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
+            docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
+            docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
 
-       - name: List all files in current directory
-         run: find /home/fs-lp-27/actions-runner/_work/yelb/yelb -type f
+    
        
 
 
@@ -76,9 +75,10 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
       - name: Upload artifact to Artifactory
-        run: jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
-
-
+        run: |
+           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-db/"
+           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-appserver/"
 
 
 
