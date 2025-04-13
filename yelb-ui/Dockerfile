@@ -6,7 +6,8 @@ LABEL maintainer="massimo@it20.info"
 
 WORKDIR /
 
-RUN npm install -g @angular/cli@6.0.0 node-sass@4.13.1
+# RUN npm install -g @angular/cli@6.0.0 node-sass@4.13.1
+RUN npm install -g --unsafe-perm @angular/cli@6.0.0 node-sass@4.13.1
 # RUN npm install -g @angular/cli@6.0.0 sass@4.13.1
 
 COPY clarity-seed-newfiles/ clarity-seed-newfiles/
