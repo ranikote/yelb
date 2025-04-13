@@ -90,9 +90,11 @@ jobs:
   
         - name: Upload artifact to Artifactory
           run: |
-             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb*" "generic1-local-generic/yelb-cve-reports/"
+             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb*.txt" "generic1-local-generic/yelb-cve-reports/"
              # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
              # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+
+
 
 
 
