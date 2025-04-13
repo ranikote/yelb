@@ -7,10 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# jobs:
-#   build:
-#     runs-on: tag1
-#     steps:
+jobs:
+  build:
+    runs-on: tag1
+    steps:
     #Dockerhub credentials#
     
        # - name: Log in to Docker Hub
