@@ -58,24 +58,24 @@ jobs:
  
 
 
-  # Jfrog-Integration-check:
-  #   runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
+  Jfrog-Integration-check:
+    runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Setup JFrog CLI with server config
-  #       uses: jfrog/setup-jfrog-cli@v3
-  #       with:
-  #         version: latest
-  #       env:
-  #         JF_URL: ${{ secrets.JF_URL }}
-  #         JF_USER: ${{ secrets.JF_USER }}
-  #         JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+      - name: Setup JFrog CLI with server config
+        uses: jfrog/setup-jfrog-cli@v3
+        with:
+          version: latest
+        env:
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
-  #     - name: Upload artifact to Artifactory
-  #       run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+      - name: Upload artifact to Artifactory
+        run: jf rt u "$(pwd)/yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
 
 
 
