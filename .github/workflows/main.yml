@@ -44,6 +44,7 @@ jobs:
 
        - name: Scan yelb-ui for vulnerabilities with Docker Scout
          run: |
+            mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
             docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
             docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
@@ -53,6 +54,8 @@ jobs:
           echo "Listing all CVE files:"
           ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
        
+
+
 
 
 
