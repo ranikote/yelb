@@ -48,7 +48,10 @@ jobs:
             docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
 
-    
+       - name: List all generated CVE files
+         run: |
+          echo "Listing all CVE files:"
+          ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
        
 
 
