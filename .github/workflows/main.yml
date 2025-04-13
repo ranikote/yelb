@@ -54,24 +54,6 @@ jobs:
           echo "Listing all CVE files:"
           ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
        
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
-
- 
-
-
   Jfrog-Integration-check:
       runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
@@ -90,7 +72,7 @@ jobs:
   
         - name: Upload artifact to Artifactory
           run: |
-             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb*.txt" "generic1-local-generic/yelb-cve-reports/"
+             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/"
              # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
              # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
 
