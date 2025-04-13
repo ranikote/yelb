@@ -47,25 +47,25 @@ jobs:
             docker scout cves yelb-ui:latest > yelb-ui-cves.txt
             docker scout cves yelb-db:latest > yelb-db-cves.txt
             docker scout cves yelb-appserver:latest > yelb-appserver-cves.txt
-            jobs:
-  Jfrog-Integration-check:
-    runs-on: tag1
+  #           jobs:
+  # Jfrog-Integration-check:
+  #   runs-on: tag1
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Setup JFrog CLI with server config
-        uses: jfrog/setup-jfrog-cli@v3
-        with:
-          version: latest
+  #     - name: Setup JFrog CLI with server config
+  #       uses: jfrog/setup-jfrog-cli@v3
+  #       with:
+  #         version: latest
         
-        env:
-           JF_URL: ${{ secrets.JF_URL }}
-           JF_USER: ${{ secrets.JF_USER }}
-           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-      - name: Upload artifact
-        run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
+  #       env:
+  #          JF_URL: ${{ secrets.JF_URL }}
+  #          JF_USER: ${{ secrets.JF_USER }}
+  #          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+  #     - name: Upload artifact
+  #       run: jf rt u "yelb-ui-cves.txt" "generic1-local-generic/yelb-ui/"
 
 
 
@@ -136,6 +136,8 @@ jobs:
 
 
         
+
+
 
 
 
