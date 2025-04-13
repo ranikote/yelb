@@ -8,7 +8,9 @@ WORKDIR /
 
 # RUN npm install -g @angular/cli@6.0.0 node-sass@4.13.1
 # RUN npm install -g --unsafe-perm @angular/cli@6.0.0 node-sass@4.13.1
-RUN npm install -g @angular/cli@6.0.0 sass
+# RUN npm install -g @angular/cli@6.0.0 sass
+RUN npm_config_user=root npm install -g @angular/cli@6.0.0 node-sass@4.13.1
+
 
 # RUN npm install -g @angular/cli@6.0.0 sass@4.13.1
 
