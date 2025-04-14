@@ -146,7 +146,7 @@ jobs:
                 echo "Checking Dockerfile paths..."
                 ls -la yelb-ui/
                 ls -la yelb-db/
-                ls -la yelb-app-server/
+                ls -la yelb-appserver/
 
 
 #Scan Docker images using hadolint#
@@ -154,7 +154,7 @@ jobs:
              run:  |
                  hadolint  ./yelb-ui/Dockerfile --ignore DL3003
                  hadolint  ./yelb-db/Dockerfile --ignore DL3003
-                 hadolint ./yelb-app-server/Dockerfile  --ignore DL3003
+                 hadolint ./yelb-appserver/Dockerfile  --ignore DL3003
 
 
        #  #Build the applictaion using docker-compose#
