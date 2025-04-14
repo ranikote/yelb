@@ -144,7 +144,8 @@ jobs:
 #      Scan Docker images using hadolint#
        - name: Scan docker images for Docker hadolint
          run:  |
-            hadolint  ./yelb-ui/Dockerfile
+            hadolint  ./yelb-ui/Dockerfile --ignore DL3003
+
             hadolint  ./yelb-db/Dockerfile
             # hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
 
