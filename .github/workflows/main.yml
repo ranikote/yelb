@@ -56,36 +56,36 @@ jobs:
 
           
        
-  # Jfrog-Integration-check:
-  #     runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
+  Jfrog-Integration-check:
+      runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
-  #     steps:
-  #       - name: Checkout code
-  #         uses: actions/checkout@v3
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
   
-  #       - name: Setup JFrog CLI with server config
-  #         uses: jfrog/setup-jfrog-cli@v3
-  #         # with:
-          #   version: latest
-          # env:
-          #   JF_URL: ${{ secrets.JF_URL }}
-          #   JF_USER: ${{ secrets.JF_USER }}
-          #   JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-        # - name: Configure JFrog CLI with Access Token
-        #   run: |
-        #     jf config add my-server \
-        #        --url=https://trialkgkkwb.jfrog.io \
-        #        --user=shriiee.raj98@gmail.com \
-        #        --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
-        #        --interactive=false
+        - name: Setup JFrog CLI with server config
+          uses: jfrog/setup-jfrog-cli@v3
+          # with:
+            version: latest
+          env:
+            JF_URL: ${{ secrets.JF_URL }}
+            JF_USER: ${{ secrets.JF_USER }}
+            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        - name: Configure JFrog CLI with Access Token
+          run: |
+            jf config add my-server \
+               --url=https://trialkgkkwb.jfrog.io \
+               --user=shriiee.raj98@gmail.com \
+               --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
+               --interactive=false
   
-        # - name: Upload artifact to Artifactory
-        #   run: |
-        #      jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
-        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
+        - name: Upload artifact to Artifactory
+          run: |
+             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
+             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
 
-        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
-        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
 
 
 
