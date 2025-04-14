@@ -137,16 +137,16 @@ jobs:
 
   lint-dockerfiles:
        
-       runs-on: ubuntu-latest
+       runs-on: tag1
        steps:
-           # - name: Checkout repository
-           #   uses: actions/checkout@v4
-           # - name: Debug file paths (optional but helpful)
-           #   run: |
-           #      echo "Checking Dockerfile paths..."
-           #      ls -la yelb-ui/
-           #      ls -la yelb-db/
-           #      ls -la yelb-appserver/
+           - name: Checkout repository
+             uses: actions/checkout@v4
+           - name: Debug file paths (optional but helpful)
+             run: |
+                echo "Checking Dockerfile paths..."
+                ls -la yelb-ui/
+                ls -la yelb-db/
+                ls -la yelb-appserver/
 
 
            #Scan Docker images using hadolint#
