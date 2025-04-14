@@ -26,10 +26,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-       # - name: Login to Amazon ECR
-       #   run: |
-       #    aws ecr get-login-password --region us-east-1 | \
-       #    docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
+       - name: Login to Amazon ECR
+         run: |
+          aws ecr get-login-password --region us-east-1 | \
+          docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
        
        #Build Docker images#
           
@@ -46,17 +46,17 @@ jobs:
           docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
           docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
 
-       - name: Push Docker image to ECR
-         run: |
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-          docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+       # - name: Push Docker image to ECR
+       #   run: |
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker push 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
           
        - name: List Docker images
          run: |
             docker images
             
-    lint-dockerfiles:
+  lint-dockerfiles:
        runs-on: tag1
        steps:
            - name: Checkout repository
@@ -125,6 +125,27 @@ jobs:
              # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
 
 
+      #Build the applictaion using docker-compose#
+       # - name: Run docker-compose up
+       #   run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
+
+        #Slack Integration#
+
+        - name: Notify Slack on success
+          if: success()
+          run: |
+            curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
+        - name: Notify Slack on failure
+          if: failure()
+          run: |
+            curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"❌ Build failed on GitHub Actions."}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
+
+
 
 
 
@@ -151,47 +172,6 @@ jobs:
             
           
       
-
-      
-
-
-
-
-
-
-    
-          
-       
-
-  
-
-
-
-
-
-
-                 
-
-
-       #  #Build the applictaion using docker-compose#
-       # - name: Run docker-compose up
-       #   run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
-
-        #Slack Integration#
-
-       # - name: Notify Slack on success
-       #   if: success()
-       #   run: |
-       #    curl -X POST -H 'Content-type: application/json' \
-       #    --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
-       #    ${{ secrets.SLACK_WEBHOOK_URL }}
-
-       # - name: Notify Slack on failure
-       #   if: failure()
-       #   run: |
-       #    curl -X POST -H 'Content-type: application/json' \
-       #    --data '{"text":"❌ Build failed on GitHub Actions."}' \
-       #    ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
 
