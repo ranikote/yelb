@@ -135,18 +135,26 @@ jobs:
           
        
 
+  lint-dockerfiles:
+       
+       runs-on: ubuntu-latest
+       steps:
+           - name: Checkout repository
+             uses: actions/checkout@v4
+           - name: Debug file paths (optional but helpful)
+             run: |
+                echo "Checking Dockerfile paths..."
+                ls -la yelb-ui/
+                ls -la yelb-db/
+                ls -la yelb-app-server/
 
-            
 
-
-            
-
-#      Scan Docker images using hadolint#
-       - name: Scan docker images for Docker hadolint
-         run:  |
-            hadolint  ./yelb-ui/Dockerfile --ignore DL3003
-            hadolint  ./yelb-db/Dockerfile --ignore DL3003
-            hadolint ./yelb-app-server/Dockerfile  --ignore DL3003
+#Scan Docker images using hadolint#
+           - name: Scan docker images for Docker hadolint
+             run:  |
+                 hadolint  ./yelb-ui/Dockerfile --ignore DL3003
+                 hadolint  ./yelb-db/Dockerfile --ignore DL3003
+                 hadolint ./yelb-app-server/Dockerfile  --ignore DL3003
 
 
        #  #Build the applictaion using docker-compose#
