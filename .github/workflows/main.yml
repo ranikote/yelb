@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # build:
-  #   runs-on: tag1
-    # steps:
+  build:
+    runs-on: tag1
+    steps:
 #Dockerhub credentials#
     
       #  - name: Log in to Docker Hub
@@ -34,20 +34,20 @@ jobs:
       #  - name: Set up Docker Scout
       #    run: |
       #       docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
-      # #Build Docker images#
+      #Build Docker images#
           
-      #  - name: Build yelb-ui Docker image
-      #    run: |
-      #     docker build -t yelb-ui:latest ./yelb-ui 
-      #     docker build -t yelb-db:latest ./yelb-db 
-      #     docker build -t yelb-appserver:latest ./yelb-appserver 
+       - name: Build yelb-ui Docker image
+         run: |
+          docker build -t yelb-ui:latest ./yelb-ui 
+          docker build -t yelb-db:latest ./yelb-db 
+          docker build -t yelb-appserver:latest ./yelb-appserver 
 
-      #  - name: Scan yelb-ui for vulnerabilities with Docker Scout
-      #    run: |
-      #       mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
-      #       docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
-      #       docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
-      #       docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
+       # - name: Scan yelb-ui for vulnerabilities with Docker Scout
+       #   run: |
+       #      mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
+       #      docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
+       #      docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
+       #      docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
 
       #  - name: List all generated CVE files
       #    run: |
@@ -56,36 +56,36 @@ jobs:
 
           
        
-  Jfrog-Integration-check:
-      runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
+  # Jfrog-Integration-check:
+  #     runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+  #     steps:
+  #       - name: Checkout code
+  #         uses: actions/checkout@v3
   
-        - name: Setup JFrog CLI with server config
-          uses: jfrog/setup-jfrog-cli@v3
-          # with:
+  #       - name: Setup JFrog CLI with server config
+  #         uses: jfrog/setup-jfrog-cli@v3
+  #         # with:
           #   version: latest
           # env:
           #   JF_URL: ${{ secrets.JF_URL }}
           #   JF_USER: ${{ secrets.JF_USER }}
           #   JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-        - name: Configure JFrog CLI with Access Token
-          run: |
-            jf config add my-server \
-               --url=https://trialkgkkwb.jfrog.io \
-               --user=shriiee.raj98@gmail.com \
-               --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
-               --interactive=false
+        # - name: Configure JFrog CLI with Access Token
+        #   run: |
+        #     jf config add my-server \
+        #        --url=https://trialkgkkwb.jfrog.io \
+        #        --user=shriiee.raj98@gmail.com \
+        #        --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
+        #        --interactive=false
   
-        - name: Upload artifact to Artifactory
-          run: |
-             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
+        # - name: Upload artifact to Artifactory
+        #   run: |
+        #      jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
+        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
 
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+        #      # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
 
 
 
@@ -139,12 +139,12 @@ jobs:
 
             
 
-      #Scan Docker images using hadolint#
-       # - name: Scan docker images for Docker hadolint
-       #   run:  |
-       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-ui/Dockerfile
-       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-db/Dockerfile
-       #      hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
+#      Scan Docker images using hadolint#
+       - name: Scan docker images for Docker hadolint
+         run:  |
+            hadolint  ./yelb-ui/Dockerfile
+            hadolint  ./yelb-db/Dockerfile
+            # hadolint --ignore DL3059 --ignore DL3022 --ignore DL4000 --ignore DL3020 ./yelb-app-server/Dockerfile
 
 
        #  #Build the applictaion using docker-compose#
