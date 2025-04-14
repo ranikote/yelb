@@ -65,7 +65,7 @@ jobs:
   
         - name: Setup JFrog CLI with server config
           uses: jfrog/setup-jfrog-cli@v3
-          # with:
+          with:
             version: latest
           env:
             JF_URL: ${{ secrets.JF_URL }}
