@@ -1,4 +1,4 @@
- name: Simple Docker Build
+name: Simple Docker Build
 
 on:
   push:
