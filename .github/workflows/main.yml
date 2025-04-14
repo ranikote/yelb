@@ -36,11 +36,11 @@ jobs:
       #       docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       #Build Docker images#
           
-       - name: Build yelb-ui Docker image
-         run: |
-          docker build -t yelb-ui:latest ./yelb-ui 
-          docker build -t yelb-db:latest ./yelb-db 
-          docker build -t yelb-appserver:latest ./yelb-appserver 
+       # - name: Build yelb-ui Docker image
+       #   run: |
+       #    docker build -t yelb-ui:latest ./yelb-ui 
+       #    docker build -t yelb-db:latest ./yelb-db 
+       #    docker build -t yelb-appserver:latest ./yelb-appserver 
 
        # - name: Scan yelb-ui for vulnerabilities with Docker Scout
        #   run: |
@@ -155,6 +155,8 @@ jobs:
                  hadolint  ./yelb-ui/Dockerfile --ignore DL3003
                  hadolint  ./yelb-db/Dockerfile --ignore DL3003
                  hadolint ./yelb-appserver/Dockerfile  --ignore DL3003
+
+                 
 
 
        #  #Build the applictaion using docker-compose#
