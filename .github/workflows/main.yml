@@ -152,7 +152,7 @@ jobs:
            #Scan Docker images using hadolint#
            - name: Scan docker images for Docker hadolint
              run:  |
-                 # hadolint  ./yelb-ui/Dockerfile --ignore DL3003
+                 # hadolint  ./yelb-ui/Dockerfile --ignore DL3003 --ignore DL3020 
                  hadolint  ./yelb-db/Dockerfile --ignore DL3003
                  hadolint ./yelb-appserver/Dockerfile  --ignore DL3003
 
