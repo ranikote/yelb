@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: tag1
-    steps:
+  # build:
+  #   runs-on: tag1
+  #   steps:
 #Dockerhub credentials#
     
       #  - name: Log in to Docker Hub
@@ -155,6 +155,8 @@ jobs:
                  hadolint  ./yelb-ui/Dockerfile --ignore DL3003
                  hadolint  ./yelb-db/Dockerfile --ignore DL3003
                  hadolint ./yelb-appserver/Dockerfile  --ignore DL3003
+
+
 
                  
 
