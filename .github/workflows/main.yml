@@ -113,6 +113,12 @@ jobs:
                --user=shriiee.raj98@gmail.com \
                --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
                --interactive=false
+               
+        - name: Upload artifact to Artifactory
+          run: |
+               jfrog rt config --show
+               jfrog rt config --list
+
   
         - name: Upload artifact to Artifactory
           run: |
