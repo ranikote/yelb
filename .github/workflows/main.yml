@@ -13,23 +13,23 @@ jobs:
     steps:
 #Dockerhub credentials#
     
-       - name: Log in to Docker Hub
-         uses: docker/login-action@v3
-         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+       # - name: Log in to Docker Hub
+       #   uses: docker/login-action@v3
+       #   with:
+       #    username: ${{ secrets.DOCKER_USERNAME }}
+       #    password: ${{ secrets.DOCKER_PASSWORD }}
 
-       - name: Configure AWS credentials
-         uses: aws-actions/configure-aws-credentials@v2
-         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+       # - name: Configure AWS credentials
+       #   uses: aws-actions/configure-aws-credentials@v2
+       #   with:
+       #    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+       #    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+       #    aws-region: us-east-1
 
-       - name: Login to Amazon ECR
-         run: |
-          aws ecr get-login-password --region us-east-1 | \
-          docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
+       # - name: Login to Amazon ECR
+       #   run: |
+       #    aws ecr get-login-password --region us-east-1 | \
+       #    docker login --username AWS --password-stdin 311141523175.dkr.ecr.us-east-1.amazonaws.com
        
        #Build Docker images#
           
@@ -40,11 +40,11 @@ jobs:
           docker build -t yelb-appserver:latest ./yelb-appserver 
             
           
-       - name: Tag Docker image
-         run: |
-          docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
-          docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
-          docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
+       # - name: Tag Docker image
+       #   run: |
+       #    docker tag yelb-ui:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-ui
+       #    docker tag yelb-db:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-db
+       #    docker tag yelb-appserver:latest 311141523175.dkr.ecr.us-east-1.amazonaws.com/ecr1:yelb-appserver
 
        # - name: Push Docker image to ECR
        #   run: |
@@ -56,73 +56,73 @@ jobs:
          run: |
             docker images
             
-  lint-dockerfiles:
-       runs-on: tag1
-       steps:
-           - name: Checkout repository
-             uses: actions/checkout@v4
-           - name: Debug file paths (optional but helpful)
-             run: |
-                echo "Checking Dockerfile paths..."
-                ls -la yelb-ui/
-                ls -la yelb-db/
-                ls -la yelb-appserver/
+  # lint-dockerfiles:
+  #      runs-on: tag1
+  #      steps:
+  #          - name: Checkout repository
+  #            uses: actions/checkout@v4
+  #          - name: Debug file paths (optional but helpful)
+  #            run: |
+  #               echo "Checking Dockerfile paths..."
+  #               ls -la yelb-ui/
+  #               ls -la yelb-db/
+  #               ls -la yelb-appserver/
 
 
-           #Scan Docker images using hadolint#
-           - name: Scan docker images for Docker hadolint
-             run:  |
-                 # hadolint  ./yelb-ui/Dockerfile --ignore DL3003 --ignore DL3020 
-                 hadolint  ./yelb-db/Dockerfile --ignore DL3003
-                 hadolint ./yelb-appserver/Dockerfile  --ignore DL3003  --ignore DL3028
+  #          #Scan Docker images using hadolint#
+  #          - name: Scan docker images for Docker hadolint
+  #            run:  |
+  #                # hadolint  ./yelb-ui/Dockerfile --ignore DL3003 --ignore DL3020 
+  #                hadolint  ./yelb-db/Dockerfile --ignore DL3003
+  #                hadolint ./yelb-appserver/Dockerfile  --ignore DL3003  --ignore DL3028
           
-           - name: Set up Docker Scout
-             run: |
-                docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
+           # - name: Set up Docker Scout
+           #   run: |
+           #      docker scout version || echo "Scout CLI is pre-bundled in Docker CLI >= v23.0"
       
 
-           - name: Scan yelb-ui for vulnerabilities with Docker Scout
-             run: |
-                mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
-                docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
-                docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
-                docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
+           # - name: Scan yelb-ui for vulnerabilities with Docker Scout
+           #   run: |
+           #      mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
+           #      docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
+           #      docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
+           #      docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
 
-           - name: List all generated CVE files
-             run: |
-                echo "Listing all CVE files:"
-                ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
+           # - name: List all generated CVE files
+           #   run: |
+           #      echo "Listing all CVE files:"
+           #      ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
 
   Jfrog-Integration-check:
       runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
+      # steps:
+      #   - name: Checkout code
+      #     uses: actions/checkout@v3
   
-        - name: Setup JFrog CLI with server config
-          uses: jfrog/setup-jfrog-cli@v3
-          with:
-            version: latest
-          env:
-            JF_URL: ${{ secrets.JF_URL }}
-            JF_USER: ${{ secrets.JF_USER }}
-            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-        - name: Configure JFrog CLI with Access Token
-          run: |
-            jf config add my-server \
-               --url=https://trialkgkkwb.jfrog.io \
-               --user=shriiee.raj98@gmail.com \
-               --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
-               --interactive=false
+      #   - name: Setup JFrog CLI with server config
+      #     uses: jfrog/setup-jfrog-cli@v3
+      #     with:
+      #       version: latest
+      #     env:
+      #       JF_URL: ${{ secrets.JF_URL }}
+      #       JF_USER: ${{ secrets.JF_USER }}
+      #       JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+      #   - name: Configure JFrog CLI with Access Token
+      #     run: |
+      #       jf config add my-server \
+      #          --url=https://trialkgkkwb.jfrog.io \
+      #          --user=shriiee.raj98@gmail.com \
+      #          --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
+      #          --interactive=false
   
-        - name: Upload artifact to Artifactory
-          run: |
-             jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
+      #   - name: Upload artifact to Artifactory
+      #     run: |
+      #        jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
+      #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
 
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
-             # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+      #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
+      #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
 
 
       #Build the applictaion using docker-compose#
@@ -131,19 +131,19 @@ jobs:
 
         #Slack Integration#
 
-        - name: Notify Slack on success
-          if: success()
-          run: |
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+        # - name: Notify Slack on success
+        #   if: success()
+        #   run: |
+        #     curl -X POST -H 'Content-type: application/json' \
+        #     --data '{"text":"✅ Build succeeded on GitHub Actions!"}' \
+        #     ${{ secrets.SLACK_WEBHOOK_URL }}
 
-        - name: Notify Slack on failure
-          if: failure()
-          run: |
-            curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"❌ Build failed on GitHub Actions."}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+        # - name: Notify Slack on failure
+        #   if: failure()
+        #   run: |
+        #     curl -X POST -H 'Content-type: application/json' \
+        #     --data '{"text":"❌ Build failed on GitHub Actions."}' \
+        #     ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
 
