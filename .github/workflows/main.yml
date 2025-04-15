@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: tag1
-    steps:
+  # build:
+  #   runs-on: tag1
+  #   steps:
 #Dockerhub credentials#
     
        # - name: Log in to Docker Hub
