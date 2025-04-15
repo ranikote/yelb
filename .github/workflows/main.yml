@@ -13,7 +13,9 @@ jobs:
 
     #Build the applictaion using docker-compose#
          - name: Run docker-compose up
-           run: docker-compose -f /actions-runner/_work/yelb/yelb/deployments/localtest/docker-compose.yaml up -d
+           run: |
+              cd /actions-runner/_work/yelb/yelb/deployments/localtest
+              docker-compose up -d
 
 
 
