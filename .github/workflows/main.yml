@@ -120,7 +120,11 @@ jobs:
         - name: Upload artifact to Artifactory
           run: |
            jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
-      #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
+          env:
+            JFROG_CLI_ENV_EXCLUDE: "*secret*;*key*;*token*"  # Remove JF_URL, JF_USER, etc. from the list
+            JF_URL: ${{ secrets.JF_URL }}
+            JF_USER: ${{ secrets.JF_USER }}
+            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}     #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
 
       #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
       #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt" "generic1-local-generic/yelb-cve-reports/"
