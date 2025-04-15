@@ -119,7 +119,7 @@ jobs:
   
         - name: Upload artifact to Artifactory
           run: |
-           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true --server-id=my-server
+           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
       #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
 
       #        # jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt" "generic1-local-generic/yelb-cve-reports/"
