@@ -93,8 +93,8 @@ jobs:
            #      echo "Listing all CVE files:"
            #      ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
 
-  Jfrog-Integration-check:
-      runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
+  # Jfrog-Integration-check:
+  #     runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
       # steps:
       #   - name: Checkout code
