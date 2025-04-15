@@ -16,6 +16,10 @@ jobs:
            run: docker-compose -f deployments/localtest/docker-compose.yaml up -d
 
 
+
+           
+
+
            
 #Dockerhub credentials#
     
