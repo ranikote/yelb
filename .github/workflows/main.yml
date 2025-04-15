@@ -100,24 +100,21 @@ jobs:
   
         - name: Setup JFrog CLI with server config
           uses: jfrog/setup-jfrog-cli@v3
-          # with:
-          #   version: latest
-          # env:
-          #   JF_URL: ${{ secrets.JF_URL }}
-          #   JF_USER: ${{ secrets.JF_USER }}
-          #   JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-        - name: Configure JFrog CLI with Access Token
-          run: |
-            jf config add my-new-server \
-               --url=https://trialkgkkwb.jfrog.io \
-               --user=shriiee.raj98@gmail.com \
-               --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
-               --interactive=false
+          with:
+            version: latest
+          env:
+            JF_URL: ${{ secrets.JF_URL }}
+            JF_USER: ${{ secrets.JF_USER }}
+            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        # - name: Configure JFrog CLI with Access Token
+        #   run: |
+        #     jf config add my-new-server \
+        #        --url=https://trialkgkkwb.jfrog.io \
+        #        --user=shriiee.raj98@gmail.com \
+        #        --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
+        #        --interactive=false
                
-        - name: Upload artifact to Artifactory
-          run: |
-               jfrog rt config --show
-               jfrog rt config --list
+      
 
   
         - name: Upload artifact to Artifactory
