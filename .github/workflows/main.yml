@@ -56,9 +56,9 @@ jobs:
          run: |
             docker images
             
-  # lint-dockerfiles:
-  #      runs-on: tag1
-  #      steps:
+  lint-dockerfiles:
+       runs-on: tag1
+       steps:
   #          - name: Checkout repository
   #            uses: actions/checkout@v4
   #          - name: Debug file paths (optional but helpful)
@@ -69,12 +69,12 @@ jobs:
   #               ls -la yelb-appserver/
 
 
-  #          #Scan Docker images using hadolint#
-  #          - name: Scan docker images for Docker hadolint
-  #            run:  |
-  #                # hadolint  ./yelb-ui/Dockerfile --ignore DL3003 --ignore DL3020 
-  #                hadolint  ./yelb-db/Dockerfile --ignore DL3003
-  #                hadolint ./yelb-appserver/Dockerfile  --ignore DL3003  --ignore DL3028
+           #Scan Docker images using hadolint#
+           - name: Scan docker images for Docker hadolint
+             run:  |
+                 # hadolint  ./yelb-ui/Dockerfile --ignore DL3003 --ignore DL3020 
+                 hadolint  ./yelb-db/Dockerfile --ignore DL3003
+                 hadolint ./yelb-appserver/Dockerfile  --ignore DL3003  --ignore DL3028
           
            # - name: Set up Docker Scout
            #   run: |
