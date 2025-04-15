@@ -37,7 +37,7 @@ jobs:
          run: |
           docker build -t yelb-ui:latest ./yelb-ui 
           docker build -t yelb-db:latest ./yelb-db 
-          docker build -t yelb-appserver:latest ./yelb-appserver 
+          docker build --no-cache -t yelb-appserver:latest ./yelb-appserver 
             
           
        # - name: Tag Docker image
