@@ -9,13 +9,13 @@ on:
 jobs:
   build:
     runs-on: tag1
-    steps:
+    # steps:
 
-    #Build the applictaion using docker-compose#
-         - name: Run docker-compose up
-           run: |
+    # #Build the applictaion using docker-compose#
+    #      - name: Run docker-compose up
+    #        run: |
               
-              docker-compose -f deployments/localtest/docker-compose.yaml  up -d  
+    #           docker-compose -f deployments/localtest/docker-compose.yaml  up -d  
 
 
 
@@ -106,21 +106,21 @@ jobs:
            #      echo "Listing all CVE files:"
            #      ls -lh /home/fs-lp-27/actions-runner/_work/yelb/yelb/
 
-  # Jfrog-Integration-check:
-  #     runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
+  Jfrog-Integration-check:
+      runs-on: tag1  # Ensure 'tag1' is a valid self-hosted runner label
   
-  #     steps:
-  #       - name: Checkout code
-  #         uses: actions/checkout@v3
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
   
-  #       - name: Setup JFrog CLI with server config
-  #         uses: jfrog/setup-jfrog-cli@v3
-  #         with:
-  #           version: latest
-  #         env:
-  #           JF_URL: ${{ secrets.JF_URL }}
-  #           JF_USER: ${{ secrets.JF_USER }}
-  #           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        - name: Setup JFrog CLI with server config
+          uses: jfrog/setup-jfrog-cli@v3
+          with:
+            version: latest
+          env:
+            JF_URL: ${{ secrets.JF_URL }}
+            JF_USER: ${{ secrets.JF_USER }}
+            JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
   #       # - name: Configure JFrog CLI with Access Token
         #   run: |
         #     jf config add my-new-server \
@@ -129,14 +129,9 @@ jobs:
         #        --access-token=cmVmdGtuOjAxOjE3NzU5MDgwOTc6akxLMlJ0aFEwNnJkbDhzS2hiMnBySnQwTm9U \
         #        --interactive=false
                
-
-
-      
-
-  
-        # - name: Upload artifact to Artifactory
-        #   run: |
-        #    jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
+        - name: Upload artifact to Artifactory
+          run: |
+           jf rt u "/home/fs-lp-27/actions-runner/_work/yelb/yelb/*.txt" "generic1-local-generic/yelb-cve-reports/" --flat=true
         #   env:
         #     JFROG_CLI_ENV_EXCLUDE: "*secret*;*key*;*token*"  # Remove JF_URL, JF_USER, etc. from the list
         #     JF_URL: ${{ secrets.JF_URL }}
