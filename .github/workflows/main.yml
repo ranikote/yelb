@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  # build:
-  #   runs-on: tag1
-    # steps:
+  build:
+    runs-on: tag1
+    steps:
 
     # #Build the applictaion using docker-compose#
     #      - name: Run docker-compose up
@@ -91,12 +91,12 @@ jobs:
 
       
 
-           # - name: Scan yelb-ui for vulnerabilities with Docker Scout
-           #   run: |
-           #      mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
-           #      docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
-           #      docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
-           #      docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
+           - name: Scan yelb-ui for vulnerabilities with Docker Scout
+             run: |
+                mkdir -p /home/fs-lp-27/actions-runner/_work/yelb/yelb/
+                docker scout cves yelb-ui:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-ui-cves.txt
+                docker scout cves yelb-db:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-db-cves.txt
+                docker scout cves yelb-appserver:latest > /home/fs-lp-27/actions-runner/_work/yelb/yelb/yelb-appserver-cves.txt
 
            # - name: List all generated CVE files
            #   run: |
